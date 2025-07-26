@@ -1,36 +1,77 @@
 @import 'tailwindcss';
 
 :root {
-  --ev-c-white: #ffffff;
-  --ev-c-white-soft: #f8f8f8;
-  --ev-c-white-mute: #f2f2f2;
+  /* Light theme colors - similar to macOS Notes */
+  --notes-white: #ffffff;
+  --notes-vibrancy: transparent;
+  --notes-paper: rgba(250, 249, 244, 0.85);
+  --notes-sidebar: rgba(247, 246, 241, 0.8);
+  --notes-sidebar-solid: #f7f6f1;
+  --notes-border: rgba(229, 228, 223, 0.8);
+  --notes-divider: #d1d0cb;
 
-  --ev-c-black: #1b1b1f;
-  --ev-c-black-soft: #222222;
-  --ev-c-black-mute: #282828;
+  /* Text colors */
+  --notes-text-primary: #1d1d1f;
+  --notes-text-secondary: #6e6e73;
+  --notes-text-tertiary: #8e8e93;
+  --notes-text-placeholder: #c7c7cc;
 
-  --ev-c-gray-1: #515c67;
-  --ev-c-gray-2: #414853;
-  --ev-c-gray-3: #32363f;
+  /* Accent colors */
+  --notes-accent: #007aff;
+  --notes-accent-hover: #0056cc;
+  --notes-warning: #ff9500;
+  --notes-success: #34c759;
+  --notes-error: #ff3b30;
 
-  --ev-c-text-1: rgba(255, 255, 245, 0.86);
-  --ev-c-text-2: rgba(235, 235, 245, 0.6);
-  --ev-c-text-3: rgba(235, 235, 245, 0.38);
+  /* Interactive elements */
+  --notes-button-bg: rgba(0, 122, 255, 0.1);
+  --notes-button-hover: rgba(0, 122, 255, 0.15);
+  --notes-selection: rgba(0, 122, 255, 0.2);
 
-  --ev-button-alt-border: transparent;
-  --ev-button-alt-text: var(--ev-c-text-1);
-  --ev-button-alt-bg: var(--ev-c-gray-3);
-  --ev-button-alt-hover-border: transparent;
-  --ev-button-alt-hover-text: var(--ev-c-text-1);
-  --ev-button-alt-hover-bg: var(--ev-c-gray-2);
+  /* Shadows */
+  --notes-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --notes-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --notes-shadow-heavy: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-:root {
-  --color-background: var(--ev-c-black);
-  --color-background-soft: var(--ev-c-black-soft);
-  --color-background-mute: var(--ev-c-black-mute);
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark theme colors */
+    --notes-white: #1c1c1e;
+    --notes-vibrancy: transparent;
+    --notes-paper: rgba(44, 44, 46, 0.85);
+    --notes-sidebar: rgba(28, 28, 30, 0.8);
+    --notes-sidebar-solid: #1c1c1e;
+    --notes-border: rgba(56, 56, 58, 0.8);
+    --notes-divider: #48484a;
 
-  --color-text: var(--ev-c-text-1);
+    /* Dark text colors */
+    --notes-text-primary: #ffffff;
+    --notes-text-secondary: #ebebf5;
+    --notes-text-tertiary: #ebebf5;
+    --notes-text-placeholder: #8e8e93;
+
+    /* Dark interactive elements */
+    --notes-button-bg: rgba(0, 122, 255, 0.15);
+    --notes-button-hover: rgba(0, 122, 255, 0.25);
+    --notes-selection: rgba(0, 122, 255, 0.3);
+
+    /* Dark shadows */
+    --notes-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --notes-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --notes-shadow-heavy: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Main color variables for easy reference */
+:root {
+  --color-background: var(--notes-vibrancy);
+  --color-background-soft: var(--notes-paper);
+  --color-background-mute: var(--notes-sidebar);
+  --color-text: var(--notes-text-primary);
+  --color-text-secondary: var(--notes-text-secondary);
+  --color-border: var(--notes-border);
+  --color-accent: var(--notes-accent);
 }
 
 *,
@@ -47,21 +88,48 @@ body {
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
-  line-height: 1.6;
+  line-height: 1.5;
   font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Selection styling */
+::selection {
+  background: var(--notes-selection);
+}
+
+::-moz-selection {
+  background: var(--notes-selection);
+}
+
+/* Scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--notes-text-placeholder);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--notes-text-tertiary);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--notes-accent);
+  outline-offset: 2px;
 }

@@ -1,13 +1,18 @@
-// import electronLogo from './assets/electron.svg'
-import geeknotesLogo from './assets/geeknotes-logo.svg'
+import { Content, NotePreviewList, RootLayout, Sidebar } from './components'
+import { ActionButtonsRow } from './components/ActionButtonRow'
+import { DraggableTopBar } from './components/DraggableTopBar'
 
 function App(): React.JSX.Element {
   return (
     <>
-      <div className="flex flex-col h-full items-center justify-center">
-        <img alt="logo" className="pointer-events-none" src={geeknotesLogo} width="250" />
-        <span className="text-4xl font-semibold text-yellow-100 mt-8">Hello from GeekNotes</span>
-      </div>
+      <DraggableTopBar />
+      <RootLayout>
+        <Sidebar className="p-2">
+          <ActionButtonsRow className="flex justify-between mt-1" />
+          <NotePreviewList className="mt-3 space-y-1" />
+        </Sidebar>
+        <Content className="p-2 border-l border-l-gray-300 app-content">Content</Content>
+      </RootLayout>
     </>
   )
 }
