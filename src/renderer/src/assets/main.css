@@ -18,7 +18,7 @@ body {
 .app-header {
   position: absolute;
   inset: 0 0 auto 0;
-  height: 32px;
+  height: var(--header-height);
   -webkit-app-region: drag;
   background: var(--color-background);
   z-index: 100;
