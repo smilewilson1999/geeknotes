@@ -1,6 +1,7 @@
 {
   "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
   "include": [
+    "./shiki.bundle.ts",
     "src/renderer/src/env.d.ts",
     "src/renderer/src/**/*",
     "src/renderer/src/**/*.tsx",
@@ -11,6 +12,8 @@
     "composite": true,
     "jsx": "react-jsx",
     "noUnusedLocals": false,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": false,
     "baseUrl": ".",
     "paths": {
       "@renderer/*": [

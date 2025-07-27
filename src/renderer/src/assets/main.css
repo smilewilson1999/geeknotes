@@ -1,5 +1,4 @@
 @import './base.css';
-@import 'tailwindcss';
 
 /* Main app layout */
 body {
@@ -19,7 +18,7 @@ body {
 .app-header {
   position: absolute;
   inset: 0 0 auto 0;
-  height: 32px;
+  height: var(--header-height);
   -webkit-app-region: drag;
   background: var(--color-background);
   z-index: 100;
@@ -27,6 +26,7 @@ body {
 }
 
 .app-title {
+  user-select: none;
   font-size: 13px;
   font-weight: 600;
   color: var(--color-text);
