@@ -10,7 +10,7 @@ export const NotePreview = ({
   title,
   // content,
   lastEditTime,
-  isActive = false,
+  isActive,
   className,
   ...props
 }: NotePreviewProps) => {
