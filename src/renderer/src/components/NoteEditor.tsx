@@ -1,11 +1,14 @@
+import { Fragment, useEffect } from 'react'
 import { useCreateBlockNote } from '@blocknote/react'
 import { BlockNoteView } from '@blocknote/mantine'
-// import { codeBlock } from '@blocknote/code-block'
+import { useEditor } from '@renderer/hooks/useEditor'
 import { createHighlighter } from '../../../../shiki.bundle'
 import '@blocknote/core/fonts/inter.css'
 import '@blocknote/mantine/style.css'
 
 export const NoteEditor = () => {
+  const { selectedNote } = useEditor()
+
   const editor = useCreateBlockNote({
     codeBlock: {
       indentLineWithTab: true,
@@ -52,5 +55,28 @@ export const NoteEditor = () => {
     }
   })
 
-  return <BlockNoteView editor={editor} />
+  // update editor content when selectedNote changes
+  useEffect(() => {
+    if (editor && selectedNote) {
+      editor
+        .tryParseHTMLToBlocks(selectedNote.content)
+        .then((blocks) => {
+          editor.replaceBlocks(editor.document, blocks)
+        })
+        .catch(() => {
+          editor.replaceBlocks(editor.document, [
+            {
+              type: 'paragraph',
+              content: selectedNote.content
+            }
+          ])
+        })
+    }
+  }, [editor, selectedNote])
+
+  return (
+    <Fragment key={selectedNote?.title}>
+      <BlockNoteView editor={editor} />
+    </Fragment>
+  )
 }

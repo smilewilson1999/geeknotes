@@ -6,7 +6,7 @@ export const notesAtom = atom<NoteInfo[]>(notesMock)
 
 export const selectedNoteAtomIndex = atom<number | null>(null)
 
-export const selectedNoteAtom = atom<NoteInfo | null>((get) => {
+export const selectedNoteAtom = atom<(NoteInfo & { content: string }) | null>((get) => {
   const notes = get(notesAtom)
   const selectedNoteIndex = get(selectedNoteAtomIndex)
 
